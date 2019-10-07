@@ -2,6 +2,8 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
+api_login_check:
+  path: /api/login_check
 
 sonata_user_admin_security:
   resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
@@ -10,3 +12,43 @@ sonata_user_admin_security:
 sonata_user_admin_resetting:
   resource: '@SonataUserBundle/Resources/config/routing/admin_resetting.xml'
   prefix: /admin/resetting
+
+app.swagger_ui:
+  path: /api/doc
+  methods: GET
+  defaults: { _controller: nelmio_api_doc.controller.swagger_ui }
+
+app.swagger:
+  path: /api/doc.json
+  methods: GET
+  defaults: { _controller: nelmio_api_doc.controller.swagger }
+
+countries:
+  type    : rest
+  resource: App\Controller\CountryController
+  prefix  : api
+
+cities:
+  type    : rest
+  resource: App\Controller\CityController
+  prefix  : api
+
+informations:
+  type    : rest
+  resource: App\Controller\InformationController
+  prefix  : api
+
+users:
+  type    : rest
+  resource: App\Controller\UserController
+  prefix  : api
+
+clients:
+  type    : rest
+  resource: App\Controller\ClientController
+  prefix  : api
+
+projects:
+  type    : rest
+  resource: App\Controller\ProjectController
+  prefix  : api

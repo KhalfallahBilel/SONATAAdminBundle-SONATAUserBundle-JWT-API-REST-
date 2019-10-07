@@ -13,6 +13,15 @@ security:
 
 
   providers:
+    chain_provider:
+      chain:
+        providers: [in_memory, fos_userbundle]
+    in_memory:
+       memory:
+         users:
+           superadmin:
+             password: 'superadminpw'
+             roles: ['ROLE_SUPER_ADMIN']
     fos_userbundle:
       id: fos_user.user_provider.username
     # used to reload user from session & other features (e.g. switch_user)
@@ -45,6 +54,7 @@ security:
       stateless: true
       anonymous: true
       json_login:
+        provider: chain_provider
         check_path: /api/login_check
         success_handler: lexik_jwt_authentication.handler.authentication_success
         failure_handler: lexik_jwt_authentication.handler.authentication_failure
@@ -52,6 +62,7 @@ security:
     api:
       pattern: ^/api
       stateless: true
+      provider: chain_provider
       guard:
         authenticators:
           - lexik_jwt_authentication.jwt_token_authenticator
